@@ -107,3 +107,10 @@ WHERE A.speed=B.speed AND A.ram=B.ram AND A.model>B.model
 ####Найдите модели ПК-блокнотов, скорость которых меньше скорости каждого из ПК. Вывести: type, model, speed.####
 
 SELECT DISTINCT Product.type, Product.model, Laptop.speed FROM Product JOIN Laptop ON Laptop.speed < (SELECT MIN(speed) FROM PC WHERE Laptop.model = Product.model)
+
+#####
+#17 #
+####Найдите производителей самых дешевых цветных принтеров. Вывести: maker, price.####
+
+SELECT DISTINCT maker, price FROM Printer JOIN Product ON Product.model=Printer.model 
+WHERE Printer.color='y' AND Printer.price=(SELECT MIN(price) FROM Printer WHERE Printer.color='y')
