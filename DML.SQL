@@ -109,8 +109,14 @@ WHERE A.speed=B.speed AND A.ram=B.ram AND A.model>B.model
 SELECT DISTINCT Product.type, Product.model, Laptop.speed FROM Product JOIN Laptop ON Laptop.speed < (SELECT MIN(speed) FROM PC WHERE Laptop.model = Product.model)
 
 #####
-#17 #
+#18 #
 ####Найдите производителей самых дешевых цветных принтеров. Вывести: maker, price.####
 
 SELECT DISTINCT maker, price FROM Printer JOIN Product ON Product.model=Printer.model 
 WHERE Printer.color='y' AND Printer.price=(SELECT MIN(price) FROM Printer WHERE Printer.color='y')
+
+#####
+#19 #
+####Для каждого производителя, имеющего модели в таблице Laptop, найдите средний размер экрана выпускаемых им ПК-блокнотов. Вывести: maker, средний размер экрана.####
+
+SELECT maker, AVG(screen) AS avg_screen FROM Product RIGHT JOIN Laptop ON Product.model=Laptop.model GROUP BY maker
