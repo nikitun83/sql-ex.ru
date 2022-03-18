@@ -122,7 +122,13 @@ WHERE Printer.color='y' AND Printer.price=(SELECT MIN(price) FROM Printer WHERE 
 SELECT maker, AVG(screen) AS avg_screen FROM Product RIGHT JOIN Laptop ON Product.model=Laptop.model GROUP BY maker
 
 #####
-#19 #
+#20 #
 ####Найдите производителей, выпускающих по меньшей мере три различных модели ПК. Вывести: Maker, число моделей ПК.####
 
 SELECT maker, COUNT(model) AS qty_model FROM Product WHERE type='PC' GROUP BY maker HAVING COUNT(model)>=3
+
+#####
+#21 #
+####Найдите максимальную цену ПК, выпускаемых каждым производителем, у которого есть модели в таблице PC. Вывести: maker, максимальная цена.####
+
+SELECT maker, MAX(price) AS max_price FROM Product JOIN PC ON Product.model=PC.model GROUP BY maker
